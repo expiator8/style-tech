@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;900&display=swap" rel="stylesheet">
+    <title>{% block page_title %}{% endblock page_title %}| Styletech</title>
+  </head>
+  {% block frameset %} {% endblock %} 
+  <body class="font-light bg-white2">
+    <header class="container max-w-full flex items-center justify-center h-20 inset-0 mb-16">
+      {% include "partials/nav.html" %}
+    </header>
+    {% block content %} {% endblock content %} 
+    
+    {% include "js.html" %}
+
+
+    {% block jquery %}{% endblock %}
+
+
+    {% include "partials/footer.html" %}
+  </body>
+</html>

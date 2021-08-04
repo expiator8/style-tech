@@ -1,0 +1,30 @@
+{% extends "base.html" %} 
+{% block page_title %}
+    Home 
+{% endblock page_title %} 
+{% block content %}
+<div class="container mx-auto flex justify-center">
+    <div class="flex flex-col items-center">
+        <form class="mx-20 mb-16" action = "{% url "naver_products:scrape" %}">
+            <div class="flex flex-col items-center">    
+                <h2>Scrape Naver</h2>
+                <input class="search-box border m-2 px-5 py-3 font-semibold placeholder-gray-500 rounded-lg shadow-md hover:shadow-lg focus:outline-none" placeholder="검색 입력(i.e 운동화)" required name = "term">
+                <input class="search-box border m-2 px-5 py-3 font-semibold placeholder-gray-500 rounded-lg shadow-md hover:shadow-lg focus:outline-none" placeholder="Page(1페이지당 40개)" required name = "num_page">
+                <button type = "submit">Start</button>
+            </div>
+        </form>
+        <a href="/naver_products">Naver</a>
+    </div>
+    <div class="flex flex-col items-center">
+        <form class="mx-20 mb-16" action = "{% url "instagram_products:scrape" %}">
+            <div class="flex flex-col items-center">    
+                <h2>Scrape Instagram</h2>
+                <input class="search-box border m-2 px-5 py-3 font-semibold placeholder-gray-500 rounded-lg shadow-md hover:shadow-lg focus:outline-none" placeholder="준비중" required name = "term">
+                <input class="search-box border m-2 px-5 py-3 font-semibold placeholder-gray-500 rounded-lg shadow-md hover:shadow-lg focus:outline-none" placeholder="준비중" required name = "num_page">
+                <button type = "submit">Start</button>
+            </div>
+        </form>
+        <a href="/instagram_products">Instagram</a>
+    </div>
+</div>
+{% endblock content %}

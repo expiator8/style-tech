@@ -1,0 +1,366 @@
+{% extends "base.html" %}
+
+
+{% block page_title %}
+    Search
+{% endblock page_title %}
+
+{% block jquery %}
+<script>
+
+    $(document).ready(function(){
+
+        $(".datepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: "2000:2100",
+            dateFormat: 'yy-mm-dd',
+        });
+        document.querySelector(".datepicker").setAttribute("autocomplete", "off");
+        
+        var submenu;
+        var submenu_id;
+        var content;
+        var parent;
+        var first_child;
+        var prev_child;
+        var all_submenu = $(".filter>div>ul");
+        $(".filter_all").click(function(){
+            if( all_submenu.is(":visible") && !document.querySelector(".filter>div>ul").classList.contains("one_open")){
+                all_submenu.slideUp();
+                document.querySelector(".filter>div>ul").classList.remove("all_open");
+            }else{
+                if( document.querySelector(".filter>div>ul").classList.contains("one_open")){
+                    parent.replaceChild(first_child, content);
+                    parent.insertBefore(content, prev_child);
+                    document.querySelector(".filter>div>ul").classList.remove("one_open");
+                }
+                all_submenu.slideDown();
+                document.querySelector(".filter>div>ul").classList.add("all_open");
+
+            }
+        });
+        
+        $(".filter>div>h3").click(function(){
+            submenu = $(this).next("ul");
+            submenu_id = submenu.attr("id");
+            content = document.querySelector(`#${submenu_id}`).parentNode;
+            parent = document.querySelector(".filter");
+            if( submenu.is(":visible") ){
+                if ( !document.querySelector(".filter>div>ul").classList.contains("all_open") ){
+                    parent.replaceChild(first_child, content);
+                    parent.insertBefore(content, prev_child);
+                    document.querySelector(".filter>div>ul").classList.remove("one_open");
+                }
+                submenu.slideUp();
+            }else{
+                if ( !document.querySelector(".filter>div>ul").classList.contains("all_open") ){
+                    first_child = parent.firstChild;
+                    prev_child = content.nextSibling;
+                    parent.insertBefore(content, parent.firstChild);
+                    document.querySelector(".filter>div>ul").classList.add("one_open");
+                }
+                if ( document.querySelector(".filter>div>ul").classList.contains("all_open") && !all_submenu.is(":visible") ){
+                    first_child = parent.firstChild;
+                    prev_child = content.nextSibling;
+                    parent.insertBefore(content, parent.firstChild);
+                    document.querySelector(".filter>div>ul").classList.add("one_open");
+                    document.querySelector(".filter>div>ul").classList.remove("all_open");
+                }
+                submenu.slideDown();
+            }
+        });
+
+        var endpoint = "/naver_products/api/chart/data"
+        var labels = []
+        var defalultData = []
+        $.ajax({
+            method:"GET",
+            url: endpoint,
+            success: function(data){
+                seller_labels = data.seller_labels
+                sellerData = data.seller_data
+                heel_height_labels = data.heel_height_labels
+                heel_heightData = data.heel_height_data
+                gender_labels = data.gender_labels,
+                genderData = data.gender_data,
+                price_labels = data.price_labels,
+                priceData = data.price_data,
+                main_material_labels= data.main_material_labels,
+                main_materialData = data.main_material_data,
+                add_ons_labels= data.add_ons_labels,
+                add_onsData = data.add_ons_data,
+                setChart()
+            },
+            error:function(error_data){
+                console.log("error")
+                console.log(error_data)
+            }
+        });
+
+        function setChart(){
+            var ctx = document.getElementById('sellerChart').getContext('2d');
+            var ctx2 = document.getElementById('heel_heightChart').getContext('2d');
+            var ctx3 = document.getElementById('genderChart').getContext('2d');
+            var ctx4 = document.getElementById('priceChart').getContext('2d');
+            var ctx5 = document.getElementById('main_materialChart').getContext('2d');
+            var ctx6 = document.getElementById('add_onsChart').getContext('2d');
+            var sellerChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: seller_labels,
+                    datasets: [{
+                        label: 'Seller',
+                        data: sellerData,
+                        backgroundColor: [
+                            'rgba(20, 20, 20, 1)',
+                        ],
+                        borderColor: [
+                            'rgba(20, 20, 20, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            var heel_heightChart = new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: heel_height_labels,
+                    datasets: [{
+                        label: 'Heel Height',
+                        data: heel_heightData,
+                        backgroundColor: [
+                            'rgba(20, 20, 20, 1)',
+                        ],
+                        borderColor: [
+                            'rgba(20, 20, 20, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            var genderChart = new Chart(ctx3, {
+                type: 'bar',
+                data: {
+                    labels: gender_labels,
+                    datasets: [{
+                        label: 'Gender',
+                        data: genderData,
+                        backgroundColor: [
+                            'rgba(20, 20, 20, 1)',
+                        ],
+                        borderColor: [
+                            'rgba(20, 20, 20, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            var main_materialChart = new Chart(ctx5, {
+                type: 'bar',
+                data: {
+                    labels: main_material_labels,
+                    datasets: [{
+                        label: 'Main material',
+                        data: main_materialData,
+                        backgroundColor: [
+                            'rgba(20, 20, 20, 1)',
+                        ],
+                        borderColor: [
+                            'rgba(20, 20, 20, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            var add_onsChart = new Chart(ctx6, {
+                type: 'bar',
+                data: {
+                    labels: add_ons_labels,
+                    datasets: [{
+                        label: 'Add-Ons',
+                        data: add_onsData,
+                        backgroundColor: [
+                            'rgba(20, 20, 20, 1)',
+                        ],
+                        borderColor: [
+                            'rgba(20, 20, 20, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            var priceChart = new Chart(ctx4, {
+                type: 'bar',
+                data: {
+                    labels: price_labels,
+                    datasets: [{
+                        label: 'price',
+                        data: priceData,
+                        backgroundColor: [
+                            'rgba(20, 20, 20, 1)',
+                        ],
+                        borderColor: [
+                            'rgba(20, 20, 20, 1)',
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    }
+);
+
+</script>
+{% endblock %}
+
+{% block content %}
+
+<div class="container" %}">
+    <div class="w-20 ml-16 fixed">
+        <form class="h-97 flex flex-col" action="{% url "naver_products:search" %}">
+            <div class="flex flex-col">
+                <div class="mb-1.5">{{form.price}}</div>
+                <div>{{form.date_from}}</div>
+                <div>{{form.date_to}}</div>
+                <div>{{form.price_max}}</div>
+                <div>{{form.price_min}}</div>
+            </div>
+            <button class="w-btn rounded-sm py-1 text-lg border border-gray-600 focus:outline-none focus:border-indigo-500 mb-1">Update</button>
+            <h3 class="filter_all cursor-pointer">Open all<i class="fas fa-caret-down text-gray-800"></i></h3>
+            <div class="filter flex flex-col h-75 overflow-x-hidden overflow-y-scroll">
+                <div>
+                    <h3 class="cursor-pointer">Brands<i class="fas fa-caret-down text-gray-800"></i></h3>
+                    {{form.brands}}
+                </div>
+                <div>
+                    <h3 class="cursor-pointer">Manufacturers<i class="fas fa-caret-down text-gray-800"></i></h3>
+                    {{form.manufacturers}}
+                </div>
+                <div>
+                    <h3 class="cursor-pointer">Categories<i class="fas fa-caret-down text-gray-800"></i></h3>
+                    {{form.categories}}
+                </div>
+                <div>
+                    <h3 class="cursor-pointer">Main material<i class="fas fa-caret-down text-gray-800"></i></h3>
+                    {{form.main_material}}
+                </div>
+                <div>
+                    <h3 class="cursor-pointer">Sole material<i class="fas fa-caret-down text-gray-800"></i></h3>
+                    {{form.sole_material}}
+                </div>
+                <div>
+                    <h3 class="cursor-pointer">Gender<i class="fas fa-caret-down text-gray-800"></i></h3>
+                    {{form.gender}}
+                </div>
+                <div>
+                    <h3 class="cursor-pointer">Ankle height<i class="fas fa-caret-down text-gray-800"></i></h3>
+                    {{form.ankle_height}}
+                </div>
+                <div>
+                    <h3 class="cursor-pointer">Heel height<i class="fas fa-caret-down text-gray-800"></i></h3>
+                    {{form.heel_height}}
+                </div>
+                <div>
+                    <h3 class="cursor-pointer">Sellers<i class="fas fa-caret-down text-gray-800"></i></h3>
+                    {{form.sellers}}
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="w-90 ml-88 flex flex-col items-center">
+        <canvas id="sellerChart" width="800" height="400"></canvas>
+        <div class="flex">
+            <canvas id="heel_heightChart" width="400" height="400"></canvas>
+            <canvas id="genderChart" width="400" height="400"></canvas>
+        </div>
+        <div class="flex">
+            <canvas id="main_materialChart" width="400" height="400"></canvas>
+            <canvas id="add_onsChart" width="400" height="400"></canvas>
+        </div>
+        <canvas id="priceChart" width="700" height="400"></canvas>
+
+        <h3>Results</h3>
+        <div class="flex flex-wrap justify-center">
+            {% for naver_product in naver_products %}
+            {% include 'mixins/naver_product_card.html' with naver_product=naver_product %}
+            {% endfor %}
+        </div>
+
+        <div class="flex justify-center">
+            {% if naver_products.has_previous %}
+                <a href="{{url}}&page=1"><< </a>
+                <a href="{{url}}&page={{naver_products.previous_page_number}}"><</a>
+            {% endif %}
+
+            {% for num in naver_products.paginator.page_range %}
+                {% if naver_products.number == num %}
+                    <strong><a href="{{url}}&page={{num}}">{{num}}</a></strong>
+                {% elif num > naver_products.number|add:"-10" and num < naver_products.number|add:"10" %}
+                    <a href="{{url}}&page={{num}}">{{num}}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if naver_products.has_next %}
+                <a href="{{url}}&page={{naver_products.next_page_number}}">> </a>
+                <a href="{{url}}&page={{naver_products.paginator.num_pages}}">>></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

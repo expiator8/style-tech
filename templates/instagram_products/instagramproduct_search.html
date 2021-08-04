@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+
+{% block page_title %}
+    Search
+{% endblock page_title %}
+
+{% block content %}
+    <h2>Search!</h2>
+    <form action="{% url "instagram_products:search" %}">
+        {{form.as_p}}
+        <button>Search</button>
+    </form>
+    <h3>Results</h3>
+
+    {% for instagram_product in instagram_products %}
+        <h3>
+            <a href="{% url "instagram_products:detail" instagram_product.pk %}">
+                {{instagram_product.writer}} /
+            </a>
+        </h3>
+    {% endfor %}
+
+    {% if instagram_products.has_previous %}
+        <a href="{{url}}&page=1"><< </a>
+        <a href="{{url}}&page={{instagram_products.previous_page_number}}"><</a>
+    {% endif %}
+
+    {% for num in instagram_products.paginator.page_range %}
+        {% if instagram_products.number == num %}
+            <strong><a href="{{url}}&page={{num}}">{{num}}</a></strong>
+        {% elif num > instagram_products.number|add:"-10" and num < instagram_products.number|add:"10" %}
+            <a href="{{url}}&page={{num}}">{{num}}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if instagram_products.has_next %}
+        <a href="{{url}}&page={{instagram_products.next_page_number}}">> </a>
+        <a href="{{url}}&page={{instagram_products.paginator.num_pages}}">>></a>
+    {% endif %}
+
+{% endblock content %}

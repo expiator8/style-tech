@@ -1,0 +1,89 @@
+[33mcommit d0b9bf62e9473504ae89746c2da202945fdb61a0[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: juhyeong <mitelux8@gmail.com>
+Date:   Wed Aug 4 16:27:01 2021 +0900
+
+    Instagram Scraper interval 1 hour
+
+[33mcommit 6fa642cdef11e643b3b222963c6cd32392a4d425[m
+Author: juhyeong <mitelux8@gmail.com>
+Date:   Wed Aug 4 15:26:08 2021 +0900
+
+    Instagram Scraper interval 1 hour
+
+[33mcommit 70df580409727a6e44288fe6f42ba0ab96b87d70[m
+Author: juhyeong <mitelux8@gmail.com>
+Date:   Wed Aug 4 15:13:53 2021 +0900
+
+    Instagram Scraper interval 1 hour
+
+[33mcommit 5123c43a7773c16ca83e2053d8e3e0901fc8f78c[m
+Author: juhyeong <mitelux8@gmail.com>
+Date:   Wed Aug 4 15:13:27 2021 +0900
+
+    Instagram Scraper interval 1 hour
+
+[33mcommit 9088fb0b171bf4fe9b3355dccae99e8418e0a4b5[m
+Author: juhyeong <mitelux8@gmail.com>
+Date:   Wed Jul 21 08:32:04 2021 +0900
+
+    Create Instagram Scraper
+
+[33mcommit 64ecefac8af3e983485cef3771caad765c590e90[m
+Author: juhyeong <mitelux8@gmail.com>
+Date:   Wed Jul 21 08:31:18 2021 +0900
+
+    Create Instagram Scraper
+
+[33mcommit c15192c38194e9fd40d441f6d13bc816dcd8d2be[m
+Author: juhyeong <mitelux8@gmail.com>
+Date:   Wed Jun 2 10:39:02 2021 +0900
+
+    Set chart.js -v.0.1
+
+[33mcommit d5a2cf3d2db27d02e9de0d614742bbc044e2f657[m
+Author: juhyeong <mitelux8@gmail.com>
+Date:   Wed Jun 2 10:33:27 2021 +0900
+
+    Set chart.js
+
+[33mcommit f04d66a3c25ddddf48fb78c2eb5be58d66ca113e[m
+Author: juhyeong <mitelux8@gmail.com>
+Date:   Mon May 3 15:18:14 2021 +0900
+
+    Make ChartView (before restframework)
+
+[33mcommit 133fd6b597f0e3b5943a92baadc2483cd0c59bb9[m
+Author: juhyeong <mitelux8@gmail.com>
+Date:   Fri Apr 16 10:52:07 2021 +0900
+
+    tailwind css card view
+
+[33mcommit 53eb19e89901fad33277b80cc13de490a5e3dc1e[m
+Author: juhyeong <mitelux8@gmail.com>
+Date:   Wed Apr 7 14:51:21 2021 +0900
+
+    Scrapper naver
+
+[33mcommit 30d178f5b0141e6c75536f082fd0800a8806bef8[m
+Author: juhyeong <mitelux8@gmail.com>
+Date:   Mon Mar 22 17:57:09 2021 +0900
+
+    Creating views for Naver and Instagram
+
+[33mcommit 245f3644251407d488ec1697c56ea27202181608[m
+Author: juhyeong <mitelux8@gmail.com>
+Date:   Thu Mar 18 00:56:14 2021 +0900
+
+    #2 Creating admin, models and functions to create fake data for Naver and Instagram
+
+[33mcommit 89409d349237e0fd90b5fa3794bd5abc1bb267f4[m
+Author: expiator8 <51435927+expiator8@users.noreply.github.com>
+Date:   Sun Mar 14 23:03:03 2021 +0900
+
+    #1 Creating admim, models, fake data for Naver
+
+[33mcommit 4e915aefb44e6040f8d5d79813cad0de4d48099b[m
+Author: expiator8 <51435927+expiator8@users.noreply.github.com>
+Date:   Thu Mar 11 04:11:32 2021 +0900
+
+     Creating Env and Installing Django
